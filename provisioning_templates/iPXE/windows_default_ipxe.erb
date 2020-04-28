@@ -8,6 +8,10 @@ oses:
 set boot-url tftp://${next-server}/
 kernel ${boot-url}<%= @host.operatingsystem.bootfile(medium_provider,:kernel) %>
 
+iseq ${platform} efi && goto win_efi || goto win_legacy
+:win_efi
+initrd -n peSetup.cmd <%= foreman_url('script') %> peSetup.cmd
+:win_legacy
 initrd <%= foreman_url('script') %> peSetup.cmd
 
 initrd ${boot-url}<%= @host.operatingsystem.bootfile(medium_provider,:bcd) %> BCD

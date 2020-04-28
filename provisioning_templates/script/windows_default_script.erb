@@ -61,7 +61,7 @@ echo Writing install image to partition while downloading additional files
    start /min cmd /C "echo Downloading finsh script and activating SetupComplete.cmd
                 md c:\deploy
                 %WGET% --no-verbose <%= foreman_url("finish") -%> -O C:\deploy\foreman-finish.bat"
-) | pause
+) | pause >nul
 
 echo Creating a temp staging folder for DISM
 md c:\MININT\Scratch
